@@ -1,5 +1,16 @@
 'use strict';
 
+const {
+  sequelize,
+  models
+} = require('./db');
+
+// Get references to the models 
+const {
+  User,
+  Course
+} = models;
+
 // load modules
 const express = require('express');
 const morgan = require('morgan');
@@ -14,6 +25,25 @@ const app = express();
 app.use(morgan('dev'));
 
 // TODO setup your api routes here
+console.log('Testing the connection to the database...');
+
+(async () => {
+  try {
+    // Test the connection to the database
+    console.log('Connection to the database successful!');
+    await sequelize.authenticate();
+
+    process.exit(); 
+    
+  } catch (error) {
+    if (error.name === 'SequelizeValidationError') {
+      const errors = error.errors.map(err => err.message);
+      console.error('Validation errors: ', errors);
+    } else {
+      throw error;
+    }
+  }
+})
 
 // setup a friendly greeting for the root route
 app.get('/', (req, res) => {
