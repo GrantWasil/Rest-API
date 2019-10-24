@@ -14,6 +14,7 @@ const {
 // load modules
 const express = require('express');
 const morgan = require('morgan');
+const bodyParser = require('body-parser');
 const userRoutes = require('./routes/user');
 const courseRoutes = require('./routes/course');
 
@@ -22,6 +23,9 @@ const enableGlobalErrorLogging = process.env.ENABLE_GLOBAL_ERROR_LOGGING === 'tr
 
 // create the Express app
 const app = express();
+
+app.use(express.json());
+app.use(bodyParser.urlencoded({extended: false}));
 
 // setup morgan which gives us http request logging
 app.use(morgan('dev'));

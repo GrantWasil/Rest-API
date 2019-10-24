@@ -1,5 +1,3 @@
-'use strict';
-
 const express = require('express');
 const router = express.Router();
 const {
@@ -55,7 +53,5 @@ router.post('/users', userValidation, (req, res) => {
         res.status(201).end();
     }
 });
-
-
 
 module.exports = router;
