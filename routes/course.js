@@ -32,7 +32,7 @@ function asyncHandler(cb) {
 // Route that returns a list of courses 
 router.get('/courses', asyncHandler(async (req, res) => {
     const courses = await Course.findAll();
-    res.json({
+    res.status(200).json({
         courses
     });
 }));
@@ -41,7 +41,7 @@ router.get('/courses', asyncHandler(async (req, res) => {
 router.get('/courses/:id', asyncHandler(async (req, res) => {
     const course = await Course.findByPk(req.params.id);
     if (course) {
-        res.json(course);
+        res.status(200).json(course);
     } else {
         res.status(404).json({
             message: "Course Not Found"

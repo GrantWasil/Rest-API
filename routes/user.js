@@ -20,7 +20,7 @@ const {validationResult} = require('express-validator');
 router.get('/users', userAuthentication, (req, res) => {
     const user = req.currentUser; 
 
-    res.json({
+    res.status(200).json({
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.emailAddress,
