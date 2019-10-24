@@ -15,6 +15,7 @@ const sequelize = new Sequelize(options);
 
 const models = {};
 
+
 // Import all of the models.
 fs
   .readdirSync(path.join(__dirname, 'models'))

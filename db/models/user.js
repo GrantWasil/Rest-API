@@ -12,18 +12,30 @@ module.exports = (sequelize) => {
         firstName: {
             type: Sequelize.STRING,
             allowNull: false,
+            validate: {
+                is: ["^[a-z]+$",'i'],
+            }
         },
         lastName: {
             type: Sequelize.STRING,
             allowNull: false,
+            validate: {
+                is: ["^[a-z]+$",'i'],
+            }
         },
         emailAddress: {
             type: Sequelize.STRING,
             allowNull: false,
+            validate: {
+                isEmail: true,
+            }
         },
         password: {
             type: Sequelize.STRING,
             allowNull: false,
+            validate: {
+                min: 4, 
+            }
         }
     }, {
         sequelize
@@ -37,6 +49,6 @@ module.exports = (sequelize) => {
             }
         })
     }
-
+    module.exports = User; 
     return User;
-}
+};
