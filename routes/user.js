@@ -21,8 +21,10 @@ router.get('/users', userAuthentication, (req, res) => {
     const user = req.currentUser; 
 
     res.json({
-        name: user.firstName + " " + user.lastName,
-        email: user.emailAddress
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.emailAddress,
+        userId: user.id
     })
 });
 
