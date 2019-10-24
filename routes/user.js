@@ -8,24 +8,23 @@ const {
     User,
 } = models;
 
+// User Authentication Middleware 
+const userAuthentication = require('../middleware/userAuthentication');
 // User Validation Middleware 
 const userValidation = require('../middleware/userValidation');
 
 // Error tracking 
 const {validationResult} = require('express-validator');
 
-/* Handler function to wrap each route. */
-function asyncHandler(cb) {
-    return async (req, res, next) => {
-        try {
-            await cb(req, res, next);
-        } catch (error) {
-            res.status(500).send(error);
-        }
-    };
-}
-
 // Route that returns the currently authenticated user 
+router.get('/users', userAuthentication, (req, res) => {
+    const user = req.currentUser; 
+
+    res.json({
+        name: user.firstName + " " + user.lastName,
+        email: user.emailAddress
+    })
+});
 
 // Route that creates a new user 
 router.post('/users', userValidation, (req, res) => {
